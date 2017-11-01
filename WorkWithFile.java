@@ -57,12 +57,15 @@ public class WorkWithFile {
         String first = loadFromFile(fileOne);
         String second = loadFromFile(fileTwo);
         StringBuilder sb = new StringBuilder();
-        String[] words = wordsFromText(first);
-        for (String word : words) {
-            if (searchWords(word, second)) {
-                sb.append(word + ";");
+        String[] wordsOne = wordsFromText(first);
+        String[] wordsTwo = wordsFromText(second);
+        for (int i=0;i<wordsTwo.length;i++) {
+            for (int j=0;j<wordsOne.length;j++) {
+                if (searchWords(wordsTwo[i], wordsOne[j])) {
+                    sb.append(wordsTwo + ";");
+                }
             }
+            saveToFile(sb.toString(), fileResult);
         }
-        saveToFile(sb.toString(), fileResult);
     }
 }
