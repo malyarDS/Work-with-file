@@ -2,6 +2,8 @@ package com_gmail_kr_malyar;
 
 import java.io.*;
 
+import static java.lang.System.out;
+
 public class WorkWithFile {
 
     public static String loadFromFile(File file) throws IllegalArgumentExeption {
@@ -30,8 +32,8 @@ public class WorkWithFile {
 
     public static boolean searchWords(String word, String text) {
         String[] wordsArray = wordsFromText(text);
-        for (String wordOne : wordsArray) {
-            if (word.equalsIgnoreCase(wordOne)) {
+        for (int i = 0; i < wordsArray.length; i++) {
+            if (word.equalsIgnoreCase(wordsArray[i])) {
                 return true;
             }
         }
@@ -58,12 +60,10 @@ public class WorkWithFile {
         String second = loadFromFile(fileTwo);
         StringBuilder sb = new StringBuilder();
         String[] wordsOne = wordsFromText(first);
-        String[] wordsTwo = wordsFromText(second);
-        for (int i=0;i<wordsTwo.length;i++) {
-            for (int j=0;j<wordsOne.length;j++) {
-                if (searchWords(wordsTwo[i], wordsOne[j])) {
-                    sb.append(wordsTwo + ";");
-                }
+        
+        for (int i = 0; i < wordsOne.length; i++) {
+            if (searchWords(wordsOne[i], second)) {
+                sb.append(wordsOne[i] + ";");
             }
             saveToFile(sb.toString(), fileResult);
         }
